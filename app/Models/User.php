@@ -32,6 +32,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
     }
 
     /**
+     * 查询指定的用户
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @param $work_id
      * @return mixed
@@ -46,6 +47,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
     }
 
     /**
+     * 修改用户密码
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @param $work_id
      * @param $old_password
@@ -70,5 +72,68 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
         }
     }
 
-
+    public static function getUserInfo($id){
+        $data = User::join('user_info','user_info.user_id','=','user.work_id')
+            -> join('permissions','permissions.permission_id','=','user.permission_id')
+            -> where('user.work_id',$id)
+            -> select('user_info.name','permissions.type','user.work_id','user_info.email','user_info.phone')
+            -> get();
+        if (count($data)){
+            $result = [
+                'name' => $data[0] -> name,
+                'type' => $data[0] -> type,
+                'work_id' => $data[0] -> work_id,
+                'email' => $data[0] -> email,
+                'phone' => $data[0] -> phone
+            ];
+            return json_success("获取个人信息成功！",$result,200);
+        }else{
+            return json_success("获取个人信息失败！",null,100);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

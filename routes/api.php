@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * @author LiangXiaoye <github.com/LiangSir-67>
+ */
 Route::group(['prefix' => 'userinfo'],function (){
     Route::post('changepassword','UserInfo\UserController@changePassword');
     Route::post('changephone','UserInfo\UserController@changePhone');

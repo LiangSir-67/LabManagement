@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
+     *
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @param Request $request
+     *      ['work_id'] => 工号
+     *      ['old_password'] => 旧密码
+     *      ['new_password'] => 新密码
      * @return \Illuminate\Http\JsonResponse
      */
     public function changePassword(Request $request){
@@ -28,6 +32,9 @@ class UserController extends Controller
     /**
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @param Request $request
+     *      ['work_id'] => 工号
+     *      ['old_phone'] => 旧电话号码
+     *      ['new_phone'] => 新电话号码
      * @return \Illuminate\Http\JsonResponse
      */
     public function changePhone(Request $request){
@@ -39,6 +46,8 @@ class UserController extends Controller
     }
 
     public function getUserInfo(){
-
+//        Auth -> id;
+        $id = '1011001';
+        return User::getUserInfo($id);
     }
 }
