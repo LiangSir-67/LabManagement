@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => 'userinfo'],function (){
+    Route::post('changepassword','UserInfo\UserController@changePassword');
+    Route::post('changephone','UserInfo\UserController@changePhone');
+    Route::get('getuserinfo','UserInfo\UserController@getUserInfo');
 });
