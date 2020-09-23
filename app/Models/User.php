@@ -44,7 +44,6 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
         }catch (\Exception $e){
             logError("获取信息失败！",[$e -> getMessage()]);
         }
-
     }
 
     /**

@@ -22,7 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * @author LiangXiaoye <github.com/LiangSir-67>
  */
 Route::group(['prefix' => 'userinfo'],function (){
-    Route::post('changepassword','UserInfo\UserController@changePassword');
-    Route::post('changephone','UserInfo\UserController@changePhone');
-    Route::get('getuserinfo','UserInfo\UserController@getUserInfo');
+    Route::post('changepassword','UserInfo\UserController@changePassword'); //修改密码
+    Route::post('changephone','UserInfo\UserController@changePhone');   //修改电话号码
+    Route::get('getuserinfo','UserInfo\UserController@getUserInfo');    //获取用户信息
+});
+
+Route::group(['prefix' => 'stuadmin'],function (){
+    Route::post('writeinfo','StuAdmin\StuAdminController@writeInfo');
 });
