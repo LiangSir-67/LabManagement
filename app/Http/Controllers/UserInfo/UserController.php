@@ -4,15 +4,15 @@ namespace App\Http\Controllers\UserInfo;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserInfo\ChangePasswordRequest;
+use App\Http\Requests\UserInfo\ChangePhoneRequest;
 use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     /**
-     *
+     * 用户修改密码
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @param Request $request
      *      ['work_id'] => 工号
@@ -20,7 +20,7 @@ class UserController extends Controller
      *      ['new_password'] => 新密码
      * @return \Illuminate\Http\JsonResponse
      */
-    public function changePassword(Request $request){
+    public function changePassword(ChangePasswordRequest $request){
         $work_id = $request['work_id'];
         $old_password = $request['old_password'];
         $new_password = $request['new_password'];
@@ -30,6 +30,7 @@ class UserController extends Controller
 
 
     /**
+     * 用户修改电话
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @param Request $request
      *      ['work_id'] => 工号
@@ -37,7 +38,7 @@ class UserController extends Controller
      *      ['new_phone'] => 新电话号码
      * @return \Illuminate\Http\JsonResponse
      */
-    public function changePhone(Request $request){
+    public function changePhone(ChangePhoneRequest $request){
         $user_id = $request['work_id'];
         $old_phone = $request['old_phone'];
         $new_phone = $request['new_phone'];
@@ -45,6 +46,11 @@ class UserController extends Controller
         return $result;
     }
 
+    /**
+     * 获取用户个人信息
+     * @author LiangXiaoye <github.com/LiangSir-67>
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getUserInfo(){
 //        Auth -> id;
         $id = '1011001';

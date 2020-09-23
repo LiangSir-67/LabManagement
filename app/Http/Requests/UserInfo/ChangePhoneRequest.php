@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ChangePasswordRequest extends FormRequest
+class ChangePhoneRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,6 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
         return true;
     }
 
@@ -28,8 +27,8 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'work_id' => 'required | numeric',
-            'old_password' => 'required',
-            'new_password' => 'required'
+            'old_phone' => 'required | regex:/^1[123456789]{1}\d{9}$/',
+            'new_phone' => 'required | regex:/^1[123456789]{1}\d{9}$/'
         ];
     }
 
