@@ -13,7 +13,7 @@ class LabOperationRecord extends Model
     /**
      * 查询当前用户是否存在
      * @author LiangXiaoye <github.com/LiangSir-67>
-     * @param $work_id
+     * @param $work_id  工号
      * @return mixed
      */
     public static function selectUserInfo($work_id){
@@ -72,14 +72,15 @@ class LabOperationRecord extends Model
      */
     public static function checkAllForm(){
         $result = LabOperationRecord::all();
-        return count($result)?
-            json_success("成功",$result,200)
-            : json_fail("无数据！",null,100);
+        return count($result) ?
+            json_success("成功",$result,200) :
+            json_fail("无数据！",null,100) ;
     }
 
     /**
-     * 查看指定的实验室运行记录表
      * @author LiangXiaoye <github.com/LiangSir-67>
+     * @param $form_id  表单编号
+     * @return \Illuminate\Http\JsonResponse
      */
     public static function checkFormByFormId($form_id){
         $result = LabOperationRecord::where('form_id',$form_id) -> get();

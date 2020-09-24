@@ -57,7 +57,6 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
     public static function updatePassword($old_password,$new_password){
 //        $work_id = auth('api') -> user() -> work_id;
         $work_id = '1011001';
-
         $data = self::selectUserInfo();
         if (count($data)){
             try {
