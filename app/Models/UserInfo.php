@@ -33,7 +33,7 @@ class UserInfo extends Model
      * @return \Illuminate\Http\JsonResponse
      */
     public static function updatePhone($old_phone,$new_phone){
-//        $user_id = Auth -> id;
+//        $work_id = auth('api') -> user() -> work_id;
         $user_id = '1011001';
         $data = UserInfo::selectUserInfo($user_id);
         if (count($data)){

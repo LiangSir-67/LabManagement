@@ -38,7 +38,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
      * @return mixed
      */
     public static function selectUserInfo(){
-//        $work_id = Auth -> id;
+//        $work_id = auth('api') -> user() -> work_id;
         $work_id = '1011001';
         try {
             return User::where('work_id',$work_id) -> get();
@@ -55,7 +55,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
      * @return \Illuminate\Http\JsonResponse
      */
     public static function updatePassword($old_password,$new_password){
-        //        $work_id = Auth -> id;
+//        $work_id = auth('api') -> user() -> work_id;
         $work_id = '1011001';
 
         $data = self::selectUserInfo();
@@ -87,7 +87,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
      * @return \Illuminate\Http\JsonResponse
      */
     public static function getUserInfo(){
-        //        $work_id = Auth -> id;
+//        $work_id = auth('api') -> user() -> work_id;
         $work_id = '1011001';
 
         $data = User::join('user_info','user_info.user_id','=','user.work_id')

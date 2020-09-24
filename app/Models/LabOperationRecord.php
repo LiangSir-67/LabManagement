@@ -39,7 +39,7 @@ class LabOperationRecord extends Model
      * @return \Illuminate\Http\JsonResponse
      */
     public static function writeInfo($weeks,$p_classes,$s_name,$s_number,$c_name,$c_type,$t_name,$drc,$note){
-//        $work_id = Auth -> id;
+//        $work_id = auth('api') -> user() -> work_id;
         $work_id = '1011001';
         $data = self::selectUserInfo($work_id);
         //查询当前用户是否存在
@@ -86,5 +86,56 @@ class LabOperationRecord extends Model
         return count($result)?
             json_success("成功",$result,200)
             :json_fail("失败",null,100);
+    }
+
+    /**
+     * 修改实验室运行记录表
+     * @author LiangXiaoye <github.com/LiangSir-67>
+     * @param $form_id  表单编号
+     * @param $weeks    周次
+     * @param $p_classes    专业班级
+     * @param $s_name   学生姓名
+     * @param $s_number 人数
+     * @param $c_name   课程名称
+     * @param $c_type   课程类型
+     * @param $t_name   教师姓名
+     * @param $drc  设备运行状况
+     * @param $note 备注
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function updateFormByFormId($form_id,$weeks,$p_classes,$s_name,$s_number,$c_name,$c_type,$t_name,$drc,$note){
+        $data = LabOperationRecord::where('form_id',$form_id) -> get();
+        $creat_time = strtotime($data[0] -> created_at);
+        $now_time = date(time());
+        $interval_time = $now_time - $creat_time;
+        $one_hour = 60*60*24;
+        if ($interval_time <= $one_hour){
+            if (count($data)){
+                try {
+                    LabOperationRecord::
+                    where('form_id',$form_id)
+                        -> update([
+                            'work_id' => '1011001',
+                            'weeks' => $weeks,
+                            'professional_classes' => $p_classes,
+                            'student_name' => $s_name,
+                            'number' => $s_number,
+                            'class_name' => $c_name,
+                            'class_type' => $c_type,
+                            'teacher_name' => $t_name,
+                            'device_run_condition' => $drc,
+                            'note' => $note
+                        ]);
+                    $data = LabOperationRecord::where('form_id',$form_id) -> get();
+                    return json_success("修改成功",$data,200);
+                }catch (\Exception $e){
+                    return json_fail("修改失败",null,100);
+                }
+            }else{
+                return json_fail("该用户不存在",null,100);
+            }
+        }else{
+            return json_fail("时间已超过24小时，修改失败！",null,100);
+        }
     }
 }

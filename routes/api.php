@@ -31,4 +31,5 @@ Route::group(['prefix' => 'stuadmin'],function (){
     Route::post('writeinfo','StuAdmin\StuAdminController@writeInfo');
     Route::get('checkallform','StuAdmin\StuAdminController@checkallform');
     Route::post('checkformbyformid','StuAdmin\StuAdminController@checkFormByFormId');
+    Route::post('updateformbyformid','StuAdmin\StuAdminController@updateFormByFormId');
 });

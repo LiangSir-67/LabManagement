@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\StuAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StuAdmin\CheckFormByFormIdRequest;
+use App\Http\Requests\StuAdmin\UpdateFormByFormIdRequest;
 use App\Http\Requests\StuAdmin\WriteInfoRequest;
 use App\Models\LabOperationRecord;
 use Illuminate\Http\Request;
@@ -49,6 +51,7 @@ class StuAdminController extends Controller
     }
 
     /**
+     * 查询所有的实验室运行记录表
      * @author LiangXiaoye <github.com/LiangSir-67>
      * @return \Illuminate\Http\JsonResponse
      */
@@ -56,8 +59,40 @@ class StuAdminController extends Controller
         return LabOperationRecord::checkAllForm();
     }
 
-    public function checkFormByFormId(Request $request){
+    /**
+     * 查询指定的实验室运行记录表
+     * @author LiangXiaoye <github.com/LiangSir-67>
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function checkFormByFormId(CheckFormByFormIdRequest $request){
         $form_id = $request['form_id'];
         return LabOperationRecord::checkFormByFormId($form_id);
+    }
+
+    public function updateFormByFormId(UpdateFormByFormIdRequest $request){
+        $form_id = $request['form_id'];
+        $weeks = $request['weeks'];
+        $p_classes = $request['professional_classes'];
+        $s_name = $request['student_name'];
+        $s_number = $request['number'];
+        $c_name = $request['class_name'];
+        $c_type = $request['class_type'];
+        $t_name = $request['teacher_name'];
+        $drc = $request['device_run_condition'];
+        $note = $request['note'];
+//        dd($request['']);
+        $result =LabOperationRecord::updateFormByFormId(
+            $form_id,
+            $weeks,
+            $p_classes,
+            $s_name,
+            $s_number,
+            $c_name,
+            $c_type,
+            $t_name,
+            $drc,
+            $note);
+        return $result;
     }
 }
