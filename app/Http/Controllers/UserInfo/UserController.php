@@ -21,10 +21,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function changePassword(ChangePasswordRequest $request){
-        $work_id = $request['work_id'];
         $old_password = $request['old_password'];
         $new_password = $request['new_password'];
-        $result = User::updatePassword($work_id,$old_password,$new_password);
+        $result = User::updatePassword($old_password,$new_password);
         return $result;
     }
 
@@ -39,10 +38,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function changePhone(ChangePhoneRequest $request){
-        $user_id = $request['work_id'];
         $old_phone = $request['old_phone'];
         $new_phone = $request['new_phone'];
-        $result = UserInfo::updatePhone($user_id,$old_phone,$new_phone);
+        $result = UserInfo::updatePhone($old_phone,$new_phone);
         return $result;
     }
 
@@ -52,8 +50,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function getUserInfo(){
-//        Auth -> id;
-        $id = '1011001';
-        return User::getUserInfo($id);
+        return User::getUserInfo();
     }
 }

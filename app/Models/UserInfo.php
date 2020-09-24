@@ -13,8 +13,7 @@ class UserInfo extends Model
     /**
      * 查询指定的用户
      * @author LiangXiaoye <github.com/LiangSir-67>
-     * @param $user_id
-     *      ['user_id'] => 工号
+     * @param $user_id  工号
      * @return mixed
      */
     public static function selectUserInfo($user_id){
@@ -29,15 +28,13 @@ class UserInfo extends Model
     /**
      * 修改用户电话号码
      * @author LiangXiaoye <github.com/LiangSir-67>
-     * @param $user_id
-     * @param $old_phone
-     * @param $new_phone
-     *      ['user_id'] => 工号
-     *      ['old_phone'] => 旧电话号码
-     *      ['new_phone'] => 新电话号码
+     * @param $old_phone    旧电话号码
+     * @param $new_phone    新电话号码
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function updatePhone($user_id,$old_phone,$new_phone){
+    public static function updatePhone($old_phone,$new_phone){
+//        $user_id = Auth -> id;
+        $user_id = '1011001';
         $data = UserInfo::selectUserInfo($user_id);
         if (count($data)){
             try {
@@ -47,13 +44,13 @@ class UserInfo extends Model
                     ]);
                     return json_success("修改电话成功！",null,200);
                 }else{
-                    return json_success("修改电话失败！",null,100);
+                    return json_fail("修改电话失败！",null,100);
                 }
             }catch (\Exception $e){
                 logError("修改用户电话失败！",$e -> getMessage());
             }
         }else{
-            return json_success("该用户不存在！",null,100);
+            return json_fail("该用户不存在！",null,100);
         }
     }
 }

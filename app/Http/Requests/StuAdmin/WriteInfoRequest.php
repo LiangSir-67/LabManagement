@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\UserInfo;
+namespace App\Http\Requests\StuAdmin;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ChangePhoneRequest extends FormRequest
+class WriteInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,15 @@ class ChangePhoneRequest extends FormRequest
     public function rules()
     {
         return [
-            'old_phone' => 'required | regex:/^1[123456789]{1}\d{9}$/',
-            'new_phone' => 'required | regex:/^1[123456789]{1}\d{9}$/'
+            'weeks' => 'required | integer',
+            'professional_classes' => 'required',
+            'student_name' => 'required',
+            'number' => 'required | integer',
+            'class_name' => 'required',
+            'class_type' => 'required',
+            'teacher_name' => 'required',
+            'device_run_condition' => 'required',
+            'note' => 'required'
         ];
     }
 

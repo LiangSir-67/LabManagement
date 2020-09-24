@@ -27,7 +27,6 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'work_id' => 'required | numeric',
             'old_password' => 'required',
             'new_password' => 'required'
         ];
